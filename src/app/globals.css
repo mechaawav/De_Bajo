@@ -141,9 +141,9 @@ html { scroll-behavior: smooth; }
 /* Utilidades para el look "polaroid"/microcopy */
 .polaroid {
   background: #fff;
-  box-shadow: 0 8px 30px rgba(0,0,0,.25);
-  border-radius: .25rem;
-  padding: .5rem .5rem 1.25rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  border-radius: .23rem;
+  padding: .4rem .4rem 1.25rem;
 }
 .angled { transform: rotate(-10deg); transform-origin: 50% 50%; }
 .microcopy { letter-spacing: .08em; line-height: 1.1; font-size: .7rem; text-transform: uppercase; }

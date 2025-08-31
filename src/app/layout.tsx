@@ -17,7 +17,16 @@ export const metadata: Metadata = {
     siteName: "De_Bajo",
     type: "website",
   },
+  icons: {
+    icon: [
+      { url: "/hero/polaroid.png?v=7", type: "image/png", sizes: "32x32" },
+      { url: "/hero/polaroid.png?v=7", type: "image/png", sizes: "192x192" },
+    ],
+    apple: "/hero/polaroid.png?v=7",
+    shortcut: "/hero/polaroid.png?v=7",
+  },
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
