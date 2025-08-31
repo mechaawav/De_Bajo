@@ -1,8 +1,13 @@
+/* Tailwind v4 */
 @import "tailwindcss";
-@import "tw-animate-css";
 
+/* Si no usás ese paquete, NO lo importes (rompe el build) */
+/* @import "tw-animate-css"; */
+
+/* Variant dark a lo Tailwind v4 */
 @custom-variant dark (&:is(.dark *));
 
+/* Mapear tokens de Tailwind a CSS variables */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -43,6 +48,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* ── Tokens LIGHT ───────────────────────────────────────── */
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -76,8 +82,14 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Brand FULLFRAME-like */
+  --brand-red: #C7332E;
+  --brand-black: #0A0A0A;
+  --brand-cream: #FAF6F2;
 }
 
+/* ── Tokens DARK ────────────────────────────────────────── */
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -112,11 +124,26 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* ── Base Tailwind ─────────────────────────────────────── */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; }
 }
+
+/* UX helpers (una sola vez) */
+html { scroll-behavior: smooth; }
+::selection { background: var(--brand-black); color: #fff; }
+
+/* Keyframes (a nivel top, no duplicados) */
+@keyframes pop { 0% { transform: scale(.98); opacity: 0 } 100% { transform: scale(1); opacity: 1 } }
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+
+/* Utilidades para el look "polaroid"/microcopy */
+.polaroid {
+  background: #fff;
+  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+  border-radius: .25rem;
+  padding: .5rem .5rem 1.25rem;
+}
+.angled { transform: rotate(-10deg); transform-origin: 50% 50%; }
+.microcopy { letter-spacing: .08em; line-height: 1.1; font-size: .7rem; text-transform: uppercase; }

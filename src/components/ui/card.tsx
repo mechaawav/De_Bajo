@@ -1,7 +1,12 @@
 import * as React from "react";
 
 export function Card({ className = "", ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={`rounded-xl border bg-white ${className}`} {...props} />;
+  return (
+    <div
+      className={`rounded-xl border bg-white transition-transform duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 ${className}`}
+      {...props}
+    />
+  );
 }
 export function CardHeader({ className = "", ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return <div className={`border-b p-4 ${className}`} {...props} />;

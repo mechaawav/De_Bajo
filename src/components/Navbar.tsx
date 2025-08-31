@@ -1,22 +1,19 @@
-// src/components/Navbar.tsx
-"use client";
-
-import Link from "next/link";
-
 export default function Navbar() {
+  const link =
+    "relative text-sm after:content-[''] after:absolute after:left-0 after:-bottom-0.5 " +
+    "after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-black " +
+    "after:transition-transform after:duration-300 hover:after:scale-x-100";
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-white/70 backdrop-blur">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <Link href="/" className="font-semibold tracking-wide">
-          De_Bajo
-        </Link>
-        <div className="flex gap-4 text-sm">
-          <Link href="/#inicio">Inicio</Link>
-          <Link href="/nosotras">Nosotras</Link>
-          <Link href="/revistas">Revistas</Link>
-          <Link href="/contacto">Contacto</Link>
-        </div>
-      </nav>
+    <header className="border-b bg-white/80 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <a href="/" className="font-semibold">De_Bajo</a>
+        <nav className="flex gap-4">
+          <a href="/nosotras" className={link}>Nosotras</a>
+          <a href="/revistas" className={link}>Revistas</a>
+          <a href="/contacto" className={link}>Contacto</a>
+        </nav>
+      </div>
     </header>
   );
 }
