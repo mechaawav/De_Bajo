@@ -1,51 +1,29 @@
-// src/app/revistas/page.tsx
-import MagazineCard, { type Issue } from "@/components/magazines/MagazineCard";
-import { getSupabasePublic } from "@/lib/supabase";
+import ComingSoonCard from "@/components/magazines/ComingSoonCard";
+import { revistasContent as c } from "@/content/revistas";
 
-async function getIssues(): Promise<Issue[]> {
-  const client = getSupabasePublic();
+export const metadata = { title: "Revistas — De_Bajo" };
 
-  if (client) {
-    try {
-      const { data, error } = await client
-        .from("issues")
-        .select("id, slug, title, month, year, cover_url")
-        .eq("published", true)
-        .order("year", { ascending: false })
-        .order("month", { ascending: false });
-
-      if (!error && data && data.length) {
-        return data as Issue[];
-      }
-    } catch (e) {
-      console.error("getIssues error:", e);
-    }
-  }
-
-  // Fallback (si no hay envs o la tabla está vacía)
-  return [
-    {
-      id: "mock-1",
-      slug: "agosto-2025",
-      title: "Edición Agosto 2025",
-      month: 8,
-      year: 2025,
-      cover_url: "https://picsum.photos/600/800?random=1",
-    },
-  ];
-}
-
-export default async function Page() {
-  const issues = await getIssues();
-
+export default function Page() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16">
-      <h1 className="mb-6 text-3xl font-semibold">Revistas</h1>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {issues.map((issue) => (
-          <MagazineCard key={issue.id} issue={issue} />
+    <main className="mx-auto max-w-6xl px-4 py-10 md:py-14">
+      <header className="mb-8 md:mb-10">
+        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
+          {c.header.title}
+        </h1>
+        <p className="mt-2 max-w-2xl text-neutral-600">{c.header.subtitle}</p>
+      </header>
+
+      <section className={c.gridClass}>
+        {c.items.map((it, i) => (
+          <ComingSoonCard
+            key={i}
+            title={it.title}
+            coverSrc={it.coverSrc}
+            soon={it.soon}
+            config={c.card}
+          />
         ))}
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
