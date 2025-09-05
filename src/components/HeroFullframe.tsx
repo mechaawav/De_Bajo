@@ -22,18 +22,18 @@ export default function HeroFullframe() {
         />
       </div>
 
-      {/* Título + Subtítulo (pueden tener centrado propio) */}
+      {/* Título + Subtítulo */}
       <div className="relative z-20">
         <PosterTitle
-  text={c.title}
-  className={c.titleClass}
-  highlights={c.titleHighlights}   // ← LEE lo que pusiste en home.ts
-/>
-
+          text={c.title}
+          className={c.titleClass}
+          highlights={c.titleHighlights}
+          animatedHighlight={c.animatedA}   // ← activa la animación de la "A"
+        />
         <PosterSubtitle text={c.subtitle} className={c.subtitleClass} />
       </div>
 
-      {/* Secciones: dos variantes controladas desde el content */}
+      {/* Secciones */}
       {c.sectionsVariant === "columnRight" ? (
         <PosterSections
           items={c.sections}
@@ -53,4 +53,3 @@ export default function HeroFullframe() {
     </PosterLayout>
   );
 }
-
