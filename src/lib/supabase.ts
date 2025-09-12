@@ -1,8 +1,12 @@
+// src/lib/supabase.ts
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 let cachedPublic: SupabaseClient | null = null;
 let cachedAdmin: SupabaseClient | null = null;
 
+/**
+ * Cliente público (usar en componentes del cliente o server)
+ */
 export function getSupabasePublic(): SupabaseClient | null {
   if (cachedPublic) return cachedPublic;
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -12,17 +16,16 @@ export function getSupabasePublic(): SupabaseClient | null {
   return cachedPublic;
 }
 
-export function getSupabaseAdmin(): SupabaseClient {
+/**
+ * Cliente admin (⚠️ usar sólo en server — rutas API)
+ */
+export function getSupabaseAdmin(): SupabaseClient | null {
   if (cachedAdmin) return cachedAdmin;
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const service = process.env.SUPABASE_SERVICE_ROLE!; // server only
-  if (!url || !service) throw new Error("Faltan env: NEXT_PUBLIC_SUPABASE_URL o SUPABASE_SERVICE_ROLE");
-  cachedAdmin = createClient(url, service, { auth: { persistSession: false } });
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const service = process.env.SUPABASE_SERVICE_ROLE; // nunca exponer en cliente
+  if (!url || !service) return null;
+  cachedAdmin = createClient(url, service, {
+    auth: { persistSession: false },
+  });
   return cachedAdmin;
-}
-
-export const supabaseAdmin = getSupabaseAdmin();
-
-export function getAppUrl() {
-  return process.env.APP_URL || "http://localhost:3000";
 }
