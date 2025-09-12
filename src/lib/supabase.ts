@@ -1,4 +1,3 @@
-// src/lib/supabase.ts
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 let cachedPublic: SupabaseClient | null = null;
@@ -13,14 +12,16 @@ export function getSupabasePublic(): SupabaseClient | null {
   return cachedPublic;
 }
 
-export function getSupabaseAdmin(): SupabaseClient | null {
+export function getSupabaseAdmin(): SupabaseClient {
   if (cachedAdmin) return cachedAdmin;
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const service = process.env.SUPABASE_SERVICE_ROLE; // ⚠️ sólo server
-  if (!url || !service) return null;
-  cachedAdmin = createClient(url, service);
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const service = process.env.SUPABASE_SERVICE_ROLE!; // server only
+  if (!url || !service) throw new Error("Faltan env: NEXT_PUBLIC_SUPABASE_URL o SUPABASE_SERVICE_ROLE");
+  cachedAdmin = createClient(url, service, { auth: { persistSession: false } });
   return cachedAdmin;
 }
+
+export const supabaseAdmin = getSupabaseAdmin();
 
 export function getAppUrl() {
   return process.env.APP_URL || "http://localhost:3000";

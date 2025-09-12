@@ -1,7 +1,7 @@
 import Image, { type StaticImageData } from "next/image";
 
 type Props = {
-  src: string | StaticImageData; // ← antes era solo string
+  src: string | StaticImageData;
   alt: string;
   frameClass?: string;
   boxClass?: string;
@@ -16,4 +16,3 @@ export default function Polaroid({ src, alt, frameClass = "", boxClass = "w-[68v
     </div>
   );
 }
-

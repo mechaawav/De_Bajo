@@ -1,14 +1,13 @@
-// src/app/revistas/[slug]/page.tsx
 type Props = { params: { slug: string }, searchParams: { token?: string } };
 
 export default async function Page({ params, searchParams }: Props) {
   const { slug } = params;
   const token = searchParams.token;
 
-  // Si viene token, pedimos una URL firmada al API
   let signedUrl: string | null = null;
   if (token) {
-    const res = await fetch(`${process.env.APP_URL}/api/access?slug=${slug}&token=${token}`, { cache: "no-store" });
+    const base = process.env.APP_URL || "http://localhost:3000";
+    const res = await fetch(`${base}/api/acceso?slug=${slug}&token=${token}`, { cache: "no-store" });
     if (res.ok) {
       const data = await res.json();
       signedUrl = data?.signedUrl ?? null;

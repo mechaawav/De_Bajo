@@ -1,10 +1,5 @@
-import HeroDeBajo from "@/components/HeroFullframe";
+import HeroFullframe from "@/components/HeroFullframe";
 
-export default function Page() {
-  return (
-    <>
-      <HeroDeBajo />
-    </>
-  );
+export default function MarketingHome() {
+  return <HeroFullframe />;
 }
-

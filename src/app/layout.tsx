@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata, Viewport } from "next";
+import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Bebas_Neue, Inter } from "next/font/google";
@@ -19,19 +19,23 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/hero/polaroid.png?v=7", type: "image/png", sizes: "32x32" },
-      { url: "/hero/polaroid.png?v=7", type: "image/png", sizes: "192x192" },
+      { url: "/hero/polaroid.png?v=10", type: "image/png", sizes: "32x32" },
+      { url: "/hero/polaroid.png?v=10", type: "image/png", sizes: "192x192" },
     ],
-    apple: "/hero/polaroid.png?v=7",
-    shortcut: "/hero/polaroid.png?v=7",
+    apple: "/hero/polaroid.png?v=10",
+    shortcut: "/hero/polaroid.png?v=10",
   },
+ 
 };
 
+export const viewport: Viewport = {
+  themeColor: "#C7332E",
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={display.className}>
-      <body className={`${body.className} text-[var(--brand-black)] bg-[var(--brand-cream)] min-h-dvh flex flex-col`}>
+      <body className={`${body.className} min-h-dvh flex flex-col`}>
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
@@ -39,3 +43,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+

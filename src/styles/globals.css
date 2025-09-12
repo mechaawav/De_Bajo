@@ -1,9 +1,6 @@
 /* Tailwind v4 */
 @import "tailwindcss";
 
-/* Si no usás ese paquete, NO lo importes (rompe el build) */
-/* @import "tw-animate-css"; */
-
 /* Variant dark a lo Tailwind v4 */
 @custom-variant dark (&:is(.dark *));
 
@@ -127,18 +124,17 @@
 /* ── Base Tailwind ─────────────────────────────────────── */
 @layer base {
   * { @apply border-border outline-ring/50; }
-  body { @apply bg-background text-foreground; }
+  body { @apply bg-[var(--brand-cream)] text-[var(--brand-black)]; }
 }
 
-/* UX helpers (una sola vez) */
 html { scroll-behavior: smooth; }
 ::selection { background: var(--brand-black); color: #fff; }
 
-/* Keyframes (a nivel top, no duplicados) */
+/* Keyframes */
 @keyframes pop { 0% { transform: scale(.98); opacity: 0 } 100% { transform: scale(1); opacity: 1 } }
 @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
 
-/* Utilidades para el look "polaroid"/microcopy */
+/* Polaroid / helpers */
 .polaroid {
   background: #fff;
   box-shadow: 0 8px 20px rgba(0,0,0,.25);
@@ -147,3 +143,90 @@ html { scroll-behavior: smooth; }
 }
 .angled { transform: rotate(-10deg); transform-origin: 50% 50%; }
 .microcopy { letter-spacing: .08em; line-height: 1.1; font-size: .7rem; text-transform: uppercase; }
+
+/* ==== GRAIN ===================== */
+@keyframes grainShift {
+  0% { transform: translate(0,0) }
+  25% { transform: translate(-1%, 1%) }
+  50% { transform: translate(1%, 0) }
+  75% { transform: translate(0, -1%) }
+  100% { transform: translate(0,0) }
+}
+
+:root{
+  --grain:
+    radial-gradient(1px 1px at 17px 29px, rgba(0,0,0,.18) 50%, transparent 51%),
+    radial-gradient(1px 1px at 61px 11px, rgba(0,0,0,.16) 50%, transparent 51%),
+    radial-gradient(1px 1px at 7px 83px,  rgba(0,0,0,.14) 50%, transparent 51%),
+    radial-gradient(1px 1px at 79px 67px, rgba(0,0,0,.12) 50%, transparent 51%),
+    radial-gradient(1px 1px at 43px 53px, rgba(0,0,0,.10) 50%, transparent 51%);
+}
+
+.grain-bg { position: relative; }
+.grain-bg::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  mix-blend-mode: multiply; opacity:.18;
+  background-image: var(--grain);
+  background-size: 100px 100px;
+  animation: grainShift 1.6s steps(2,end) infinite;
+}
+
+/* MAX */
+:root{
+  --grain-max-dark:
+    radial-gradient(1px 1px at 6px 5px, rgba(0,0,0,.62) 50%, transparent 51%),
+    radial-gradient(1px 1px at 12px 18px, rgba(0,0,0,.58) 50%, transparent 51%),
+    radial-gradient(1px 1px at 23px 9px, rgba(0,0,0,.66) 50%, transparent 51%),
+    radial-gradient(1px 1px at 32px 27px, rgba(0,0,0,.60) 50%, transparent 51%),
+    radial-gradient(1px 1px at 45px 14px, rgba(0,0,0,.64) 50%, transparent 51%),
+    radial-gradient(1px 1px at 58px 33px, rgba(0,0,0,.62) 50%, transparent 51%),
+    radial-gradient(1px 1px at 65px 6px, rgba(0,0,0,.67) 50%, transparent 51%),
+    radial-gradient(1px 1px at 78px 22px, rgba(0,0,0,.63) 50%, transparent 51%),
+    radial-gradient(1px 1px at 86px 38px, rgba(0,0,0,.60) 50%, transparent 51%),
+    radial-gradient(1px 1px at 5px 41px, rgba(0,0,0,.68) 50%, transparent 51%),
+    radial-gradient(1px 1px at 18px 52px, rgba(0,0,0,.63) 50%, transparent 51%),
+    radial-gradient(1px 1px at 29px 64px, rgba(0,0,0,.59) 50%, transparent 51%),
+    radial-gradient(1px 1px at 41px 58px, rgba(0,0,0,.66) 50%, transparent 51%),
+    radial-gradient(1px 1px at 53px 47px, rgba(0,0,0,.61) 50%, transparent 51%),
+    radial-gradient(1px 1px at 72px 55px, rgba(0,0,0,.65) 50%, transparent 51%),
+    radial-gradient(1px 1px at 88px 66px, rgba(0,0,0,.62) 50%, transparent 51%),
+    radial-gradient(1px 1px at 12px 74px, rgba(0,0,0,.64) 50%, transparent 51%),
+    radial-gradient(1px 1px at 37px 82px, rgba(0,0,0,.60) 50%, transparent 51%),
+    radial-gradient(1px 1px at 59px 90px, rgba(0,0,0,.68) 50%, transparent 51%),
+    radial-gradient(1px 1px at 80px 88px, rgba(0,0,0,.64) 50%, transparent 51%);
+  --grain-max-light:
+    radial-gradient(1px 1px at 9px 8px, rgba(255,255,255,.42) 50%, transparent 51%),
+    radial-gradient(1px 1px at 27px 6px, rgba(255,255,255,.36) 50%, transparent 51%),
+    radial-gradient(1px 1px at 21px 29px, rgba(255,255,255,.40) 50%, transparent 51%),
+    radial-gradient(1px 1px at 39px 18px, rgba(255,255,255,.34) 50%, transparent 51%),
+    radial-gradient(1px 1px at 54px 26px, rgba(255,255,255,.38) 50%, transparent 51%),
+    radial-gradient(1px 1px at 68px 14px, rgba(255,255,255,.36) 50%, transparent 51%),
+    radial-gradient(1px 1px at 73px 37px, rgba(255,255,255,.40) 50%, transparent 51%),
+    radial-gradient(1px 1px at 86px 11px, rgba(255,255,255,.34) 50%, transparent 51%);
+}
+
+.grain-max-bg { position: relative; }
+.grain-max-bg::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image: var(--grain-max-dark), var(--grain-max-light);
+  background-size: 42px 42px, 64px 64px;
+  background-blend-mode: multiply, screen;
+  mix-blend-mode: normal;
+  opacity:.70;
+}
+
+.grain-max-text { position: relative; }
+.grain-max-text::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image: var(--grain-max-dark), var(--grain-max-light);
+  background-size: 36px 36px, 58px 58px;
+  background-blend-mode: multiply, screen;
+  mix-blend-mode: normal;
+  opacity:.78;
+}
+
+/* Retro cursor */
+.retro-cursor-active, .retro-cursor-active * { cursor: none !important; }
+.retro-cursor{ position: fixed; z-index: 9999; top:0; left:0; pointer-events:none; will-change: transform; }
+.retro-cursor__svg{ width:18px; height:18px; }
+.retro-cursor--hand .retro-cursor__svg{ width:20px; height:20px; }

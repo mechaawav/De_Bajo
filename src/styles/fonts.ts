@@ -1,6 +1,5 @@
 import { Bebas_Neue, Anton, Oswald, Archivo_Black } from "next/font/google";
 
-// Fuentes para la animación
 export const bebas = Bebas_Neue({ subsets: ["latin"], weight: "400" });
 export const anton = Anton({ subsets: ["latin"], weight: "400" });
 export const oswald = Oswald({ subsets: ["latin"], weight: "700" });
