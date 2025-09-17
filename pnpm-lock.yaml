@@ -17,12 +17,24 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.57.4
         version: 2.57.4
+      '@types/react':
+        specifier: ^19.1.13
+        version: 19.1.13
+      '@types/react-dom':
+        specifier: ^19.1.9
+        version: 19.1.9(@types/react@19.1.13)
       astro:
         specifier: ^5.13.8
         version: 5.13.8(@types/node@24.5.1)(@vercel/functions@2.2.13)(rollup@4.50.2)(typescript@5.9.2)
       bcryptjs:
         specifier: ^3.0.2
         version: 3.0.2
+      react:
+        specifier: ^19.1.1
+        version: 19.1.1
+      react-dom:
+        specifier: ^19.1.1
+        version: 19.1.1(react@19.1.1)
 
 packages:
 

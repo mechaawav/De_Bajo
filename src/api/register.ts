@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { getServiceClient } from '../../lib/supabase';
-import { sendPasswordEmail } from '../../lib/email';
+import { getServiceClient } from '../lib/supabase';
+import { sendPasswordEmail } from '../lib/email';
 import bcrypt from 'bcryptjs';
 
 

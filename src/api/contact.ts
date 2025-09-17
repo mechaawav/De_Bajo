@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { sendContactEmail } from '../../lib/email';
+import { sendContactEmail } from '../lib/email';
 
 
 export const POST: APIRoute = async ({ request }) => {

@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getServiceClient } from '../../lib/supabase';
+import { getServiceClient } from '../lib/supabase';
 import bcrypt from 'bcryptjs';
 
 
