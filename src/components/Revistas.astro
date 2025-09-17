@@ -1,0 +1,66 @@
+---
+import { useState } from 'react';
+import MagazineCard from './MagazineCard.jsx';
+import EmailModal from './EmailModal.jsx';
+
+
+const magazines = [
+{ title: 'De_Bajo #1', cover: '/images/portada1.jpg', slug: 'revista-1' },
+{ title: 'De_Bajo #2', cover: '/images/portada2.jpg', slug: 'revista-2' },
+{ title: 'De_Bajo #3', cover: '/images/portada3.jpg', slug: 'revista-3' },
+];
+---
+<section id="revistas" class="section">
+<div class="container">
+<h2 style="margin:0 0 16px; font-size:32px; letter-spacing:.1em;">Revistas</h2>
+<div class="cards">
+{magazines.map(m => (
+<fragment>
+<MagazineCard client:load cover={m.cover} title={m.title} slug={m.slug} onRead={(slug, title)=>window.dispatchEvent(new CustomEvent('open-modal', { detail: { slug, title } }))} />
+</fragment>
+))}
+</div>
+<EmailModal client:load open={false} />
+</div>
+</section>
+
+
+<script>
+// Portal simple para abrir el modal desde las tarjetas
+let modal;
+let state = { open:false, magazine:null };
+
+
+function render(){
+const root = document.querySelector('#__email_modal_root');
+if(!root) return;
+root.innerHTML = '';
+const div = document.createElement('div');
+root.appendChild(div);
+
+
+// Montamos el componente modal dinámicamente
+import('./EmailModal.jsx').then(({ default: EmailModal }) => {
+const { createElement } = await import('react');
+const { createRoot } = await import('react-dom/client');
+const r = createRoot(div);
+r.render(createElement(EmailModal, {
+open: state.open,
+magazine: state.magazine,
+onClose: ()=>{ state.open=false; render(); }
+}));
+});
+}
+
+
+if (typeof window !== 'undefined') {
+window.addEventListener('open-modal', (e)=>{
+state.open = true; state.magazine = e.detail.slug; render();
+});
+window.addEventListener('DOMContentLoaded', ()=>{
+const host = document.createElement('div');
+host.id = '__email_modal_root';
+document.body.appendChild(host);
+});
+}
+</script>
