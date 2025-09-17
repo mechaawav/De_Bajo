@@ -1,16 +1,25 @@
 ---
-// reemplazá la import anterior de Revistas.astro
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.jsx';
+import Nosotras from '../components/Nosotras.astro';
 import Revistas from '../components/Revistas.jsx';
+import Contacto from '../components/Contacto.astro';
+import '../styles/globals.css';  // ← importa el CSS aquí
 ---
 <html lang="es">
   <head>
-    <!-- ... lo demás igual ... -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>De_Bajo — Revista del Under cordobés</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@700&family=Playfair+Display:wght@700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
   </head>
   <body>
     <Navbar />
     <Hero client:load />
     <Nosotras />
-    <Revistas client:load />   <!-- 👈 importante el client:load -->
+    <Revistas client:load />
     <Contacto />
   </body>
 </html>
