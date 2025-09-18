@@ -1,0 +1,22 @@
+/* ==========================================================================
+   De_Bajo — estilos globales (grainy + grunge)
+   Archivo: src/styles/globals.css
+   ========================================================================== */
+
+:root {
+  --red: #b10f2e;        /* rojo base */
+  --red-dark: #7f0b21;   /* sombras */
+  --ink: #ffffff;        /* texto principal */
+  --ink-dim: rgba(255,255,255,0.85);
+  --line: rgba(255,255,255,0.1);
+}
+
+/* Reset mínimo */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+img, video { max-width: 100%; height: auto; display: block; }
+button, input, textarea, select { font: inherit; color: inherit; }
+
+/* Fondo rojo + capas grunge (a prueba de balas) */
+html { background: var(--re
+d); }

@@ -1,5 +1,5 @@
 ---
-import '../styles/globals.css';
+import cssHref from '../styles/globals.css?url'; // ✅ esto sí
 const { title = 'De_Bajo — Revista del Under cordobés' } = Astro.props;
 ---
 <html lang="es">
@@ -8,6 +8,8 @@ const { title = 'De_Bajo — Revista del Under cordobés' } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
 
+  <link rel="stylesheet" href="/app.css" />  <!-- ✅ desde /public -->
+  
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
