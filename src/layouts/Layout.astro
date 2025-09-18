@@ -7,13 +7,152 @@ const { title = 'De_Bajo — Revista del Under cordobés' } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
 
-    <!-- CSS global servido desde /public -->
-    <link rel="stylesheet" href="/app.css" />
-
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@700&family=Playfair+Display:wght@700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet" />
+
+    <!-- CSS GLOBAL INCRUSTADO -->
+    <style is:global>
+      :root {
+        --red: #b10f2e;        /* rojo base */
+        --red-dark: #7f0b21;   /* sombras */
+        --ink: #ffffff;        /* texto principal */
+        --ink-dim: rgba(255,255,255,0.85);
+        --line: rgba(255,255,255,0.1);
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; margin: 0; }
+      img, video { max-width: 100%; height: auto; display: block; }
+      button, input, textarea, select { font: inherit; color: inherit; }
+
+      html { background: var(--red) !important; }
+      body {
+        background: var(--red) !important;
+        color: var(--ink);
+        line-height: 1.5;
+        overflow-x: hidden;
+        position: relative;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family:
+          system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+          Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      }
+
+      /* grano */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/></filter>\
+<rect width='100%' height='100%' filter='url(%23n)' opacity='0.16'/></svg>");
+        mix-blend-mode: multiply;
+        opacity: .38;
+        z-index: 0;
+      }
+      /* viñetas oscuras */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: -10vmax;
+        pointer-events: none;
+        background:
+          radial-gradient(80vmax 80vmax at 50% -10%, transparent 40%, rgba(0,0,0,.35) 100%),
+          radial-gradient(140vmax 100vmax at 120% 120%, transparent 35%, rgba(0,0,0,.45) 100%),
+          radial-gradient(140vmax 100vmax at -20% 120%, transparent 35%, rgba(0,0,0,.45) 100%);
+        z-index: 0;
+      }
+
+      .container { width: min(1100px, 94vw); margin: 0 auto; position: relative; z-index: 1; }
+      .section { padding: 72px 0; border-top: 1px solid var(--line); }
+      hr { border: 0; border-top: 1px solid var(--line); margin: 32px 0; }
+
+      a { color: var(--ink); text-underline-offset: .18em; }
+      a:hover { text-decoration: underline; }
+      .btn {
+        display: inline-block; padding: 10px 16px; border: 1px solid var(--ink);
+        color: var(--ink); text-decoration: none; background: transparent; cursor: pointer;
+        transition: background .15s ease, color .15s ease, transform .15s ease;
+      }
+      .btn:hover { background: var(--ink); color: #000; }
+      .shadow-card {
+        background: rgba(0,0,0,0.08); border: 1px solid var(--line);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      }
+
+      /* NAVBAR */
+      .navbar {
+        position: sticky; top: 0; z-index: 50;
+        background: rgba(0,0,0,0.22);
+        backdrop-filter: blur(6px);
+        border-bottom: 1px solid var(--line);
+      }
+      .navbar-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+      .nav-links a { margin-left: 18px; color: var(--ink); text-decoration: none; letter-spacing: .04em; }
+
+      /* HERO */
+      .hero { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; padding: 80px 0; }
+      .hero-title {
+        font-size: clamp(48px, 12vw, 160px); font-weight: 900; letter-spacing: .06em; line-height: .9;
+        text-transform: uppercase; text-shadow: 0 4px 0 var(--red-dark), 0 8px 20px rgba(0,0,0,0.35);
+      }
+      .hero-sub {
+        font-size: clamp(18px, 3vw, 28px); margin-top: 8px; color: var(--ink-dim);
+        text-shadow: 0 2px 8px rgba(0,0,0,.55);
+      }
+      .hero-side {
+        font-size: 16px; text-transform: uppercase; letter-spacing: .12em; display: grid; gap: 6px; align-content: start;
+        color: var(--ink-dim); text-shadow: 0 2px 8px rgba(0,0,0,.55);
+      }
+
+      /* NOSOTRAS */
+      .story { text-align: center; }
+      .story img { max-width: 720px; width: 100%; border: 2px solid rgba(255,255,255,0.25); display: block; margin: 18px auto; }
+      .bio { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 28px; }
+      .bio-item { display: grid; grid-template-columns: 140px 1fr; gap: 18px; align-items: start; }
+      .bio-item img { width: 140px; height: 140px; object-fit: cover; border: 2px solid rgba(255,255,255,0.25); }
+
+      /* REVISTAS */
+      .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      .card {
+        aspect-ratio: 3/4; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.18);
+        transform: translateZ(0); transition: transform .25s ease, box-shadow .25s ease; background: #000; will-change: transform;
+      }
+      .card:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 16px 40px rgba(0,0,0,0.45); }
+      .card img { width: 100%; height: 100%; object-fit: cover; opacity: .92; }
+      .card .card-bar {
+        position: absolute; inset: auto 0 0 0; padding: 10px;
+        background: linear-gradient(to top, rgba(0,0,0,.7), transparent);
+        display: flex; justify-content: space-between; align-items: center;
+      }
+
+      /* MODAL / FORM */
+      .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: grid; place-items: center; z-index: 100; }
+      .modal { width: min(520px, 92vw); background: #1d1d1d; color: #fff; border: 1px solid rgba(255,255,255,0.18); padding: 22px; }
+      .modal h3 { margin: 0 0 12px; }
+      .modal form { display: grid; gap: 12px; }
+      .modal input, .modal select, .modal button, .modal textarea {
+        padding: 10px 12px; border: 1px solid rgba(255,255,255,0.3); background: #101010; color: #fff;
+      }
+      .modal button { cursor: pointer; }
+      .contact { max-width: 680px; margin: 0 auto; }
+
+      /* RESPONSIVE */
+      @media (max-width: 960px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 720px) {
+        .hero { grid-template-columns: 1fr; gap: 18px; }
+        .bio-item { grid-template-columns: 1fr; }
+        .cards { grid-template-columns: 1fr; }
+      }
+
+      ::selection { background: #000; color: #fff; }
+      @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+    </style>
   </head>
   <body>
     <slot />
