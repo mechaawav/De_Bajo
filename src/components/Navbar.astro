@@ -24,17 +24,16 @@
     <a href="#contacto">CONTACTO</a>
   </nav>
 
+  <!-- JS + JSDoc (sin TypeScript) -->
   <script type="module">
     // @ts-check
 
     /** @type {HTMLButtonElement | null} */
-    const btn = document.getElementById('nav-toggle');
+    const btn = /** @type {HTMLButtonElement | null} */ (document.getElementById('nav-toggle'));
     /** @type {HTMLElement | null} */
-    const drawer = document.getElementById('nav-drawer');
+    const drawer = /** @type {HTMLElement | null} */ (document.getElementById('nav-drawer'));
 
-    if (!btn || !drawer) {
-      // Si el markup no está, no se hace nada (evita nulls).
-    } else {
+    if (btn && drawer) {
       /** @param {boolean} isOpen */
       const openMenu = (isOpen) => {
         if (isOpen) {
@@ -53,10 +52,9 @@
       });
 
       drawer.addEventListener('click', (e) => {
-        const target = e.target;
-        if (target instanceof HTMLAnchorElement) {
-          openMenu(false);
-        }
+        /** @type {HTMLElement|null} */
+        const target = /** @type {HTMLElement|null} */ (e.target);
+        if (target && target.closest('a')) openMenu(false);
       });
 
       window.addEventListener('resize', () => {

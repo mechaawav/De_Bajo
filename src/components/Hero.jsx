@@ -13,38 +13,75 @@ const FONTS = [
 
 
 export default function Hero() {
-const [idx, setIdx] = useState(0);
-useEffect(() => {
-const t = setInterval(() => setIdx((i) => (i + 1) % FONTS.length), 2000);
-return () => clearInterval(t);
-}, []);
+  // =============================
+  // CONTROLES – editá solo estos valores
+  // Positivo X => derecha | Negativo X => izquierda
+  // Positivo Y => abajo   | Negativo Y => arriba
+  // Acepta px, %, vw, rem, etc.
+  // =============================
+  const heroVars = {
+    /* TÍTULO GIGANTE */
+    '--title-tx': '0px',
+    '--title-ty': '0px',
+    '--title-scale': '2.1',
 
+    /* BLOQUE BLANCO DETRÁS DE LA “A” (posición base + micro-ajustes) */
+    '--a-left': '52%',
+    '--a-top': '8%',
+    '--a-w': '13%',
+    '--a-h': '72%',
+    '--a-tx': '0px',   // micro X del bloque
+    '--a-ty': '0px',   // micro Y del bloque
 
-const aStyle = {
-fontFamily: `'${FONTS[idx]}', system-ui, sans-serif`,
-display: 'inline-block',
-transform: idx % 2 ? 'rotate(-3deg) scale(1.05)' : 'rotate(2deg) skewX(-4deg)',
-textDecoration: idx % 3 === 0 ? 'underline' : 'none'
-};
+    /* LETRA “A” (independiente del bloque) */
+    '--a-letter-tx': '0px',
+    '--a-letter-ty': '0px',
+    '--a-letter-scale': '1',
 
+    /* LISTA LATERAL (poesía / ensayos / ...) */
+    '--side-tx': '0px',
+    '--side-ty': '0px',
 
-return (
-<section id="inicio" className="container hero">
-<div>
-<h1 className="hero-title">
-DE_B
-<span style={aStyle}>A</span>
-JO
-</h1>
-<div className="hero-sub">La revista del Under cordobés.</div>
-</div>
-<div className="hero-side">
-<div>Poesía</div>
-<div>Ensayos</div>
-<div>Entrevistas</div>
-<div>Cine</div>
-<div>Música</div>
-</div>
-</section>
-);
+    /* POLAROID */
+    '--polaroid-right': '20%',
+    '--polaroid-bottom': '-25%',
+    '--polaroid-w': '280px',
+    '--polaroid-h': '180px',
+    '--polaroid-rot': '-6deg',
+    '--polaroid-tx': '0px',
+    '--polaroid-ty': '0px',
+
+    /* ESTRUCTURA DEL HERO */
+    '--hero-gap': '30px',
+  };
+
+  return (
+    <section className="hero" style={heroVars}>
+      <div>
+        <h1 className="hero-title">
+          DE_B
+          {/* Fondo + letra A controlados por variables */}
+          <span className="a-wrap">
+            <span className="a-block" />
+            <span className="a-letter">A</span>
+          </span>
+          JO
+        </h1>
+        <div className="hero-sub">La revista del Under cordobés</div>
+      </div>
+
+      <div className="hero-side">
+        <div>POESÍA</div>
+        <div>ENSAYOS</div>
+        <div>ENTREVISTAS</div>
+        <div>CINE</div>
+        <div>MÚSICA</div>
+      </div>
+
+      <div className="polaroid">
+        <div className="ph" />
+        <div className="caption">DE_BAJO</div>
+      </div>
+    </section>
+  );
 }

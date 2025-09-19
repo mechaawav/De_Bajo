@@ -1,5 +1,5 @@
 ---
-const { title = 'De_Bajo' } = Astro.props;
+const { title = 'De_Bajo — Revista del Under cordobés' } = Astro.props;
 ---
 <html lang="es">
   <head>
@@ -7,29 +7,112 @@ const { title = 'De_Bajo' } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
 
-    <!-- Fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700;900&display=swap" rel="stylesheet" />
+    <!-- ============================
+         Fuentes
+    ================================= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- ======================  CSS GLOBAL (inline)  ====================== -->
+    <!-- ============================
+         CSS GLOBAL (todo el sitio)
+    ================================= -->
     <style is:global>
-      /* ====== Tema ====== */
+      /* ╔══════════════════════════════════════════════════════════════════╗
+         ║  PALETA + CONTROLES GLOBALES (editá estos valores)              ║
+         ╚══════════════════════════════════════════════════════════════════╝ */
       :root{
-        --bg-red: #b74339;         /* rojo principal */
-        --bg-red-deep:#8f3028;     /* sombras */
-        --ink: #0a0a0a;            /* negro para títulos */
-        --text:#1b1b1b;            /* texto en paneles */
-        --paper:#ffffff;           /* papel */
+        /* ── Colores ───────────────────────────────────────────────────── */
+        --bg-red: #b74339;
+        --bg-red-deep:#8f3028;
+        --ink:#0a0a0a;
+        --text:#1b1b1b;
+        --paper:#ffffff;
         --paper-dot: rgba(0,0,0,.10);
         --line: rgba(0,0,0,.10);
         --muted:#6a6a6a;
-        --brand:#e06a5f;           /* acento para links/brand */
+        --brand:#e06a5f;
+
+        /* ── Sombra / radios ───────────────────────────────────────────── */
         --radius: 20px;
         --shadow: 0 18px 60px rgba(0,0,0,.35);
+
+        /* ── Layout base ───────────────────────────────────────────────── */
+        --container-max: 1120px;      /* ancho máximo del contenido */
+        --container-pad-x: 16px;      /* padding horizontal del container */
+        --navbar-h: 66px;             /* alto del header */
+        --section-pad: 90px;          /* padding vertical de secciones */
+        --grid-gap: 26px;             /* separación entre columnas/filas */
+
+        /* ── HERO (títulos / piezas principales) ───────────────────────── */
+        --hero-gap: 32px;             /* separación columnas del hero */
+        --hero-title-scale: 2.3;        /* 0.9–1.2 recomendado */
+
+        /* ╔══════════════════════════════════════════════════════════════╗
+           ║ OFFSETS / MOVIMIENTO (izq-der y arriba-abajo)               ║
+           ║   • positivo X => derecha   • negativo X => izquierda       ║
+           ║   • positivo Y => abajo     • negativo Y => arriba          ║
+           ╚══════════════════════════════════════════════════════════════╝ */
+        /* Título gigante “DE_BAJO” */
+        --hero-title-tx: 800px;           /* ej: 24px  /  2vw */
+        --hero-title-ty: -40px;           /* ej: -12px / -1rem */
+
+        /* Subtítulo (controles) */
+--subtitle-tx: 800px;      /* mover en X: px, %, vw… */
+--subtitle-ty: 100px;      /* mover en Y */
+--subtitle-scale: 1;   /* escala (1 = igual) */
+--subtitle-mt: 8px;    /* margen superior */
+
+        /* Bloque blanco detrás de la "A" */
+        --hero-a-x: 0;
+        --hero-a-y: 0;
+
+        /* Polaroid (tarjeta inclinada) */
+        --polaroid-x: 0;
+        --polaroid-y: 250px;
+
+        /* Lista lateral (Poesía / Ensayos / …) */
+        --hero-side-x: 0;
+        --hero-side-y: 0;
+
+        /* ── Posiciones y tamaños propios de piezas ───────────────────── */
+        /* Bloque blanco detrás de la “A” (posición base) */
+        --hero-a-left: 52%;
+        --hero-a-top: 8%;
+        --hero-a-w: 13%;
+        --hero-a-h: 72%;
+
+        /* Polaroid (posición base y tamaño) */
+        --polaroid-w: 280px;
+        --polaroid-right: 5%;
+        --polaroid-bottom: -4%;
+        --polaroid-rot: -6deg;
+        --polaroid-h: 180px;
+
+        /* Lista lateral del hero */
+        --hero-side-mt: 16px;
+        --hero-side-ml: 0;
+
+        /* Historia / bios */
+        --story-img-max: 720px;
+        --bio-img: 140px;
+
+        /* Revistas (cards) */
+        --card-min-h: 420px;
+        --card-ratio: 3/4;
+        --cards-cols-desktop: 3;
+        --cards-cols-tablet: 2;
+
+        /* Grano (intensidad) */
+        --grain-opacity: .35;
       }
 
-      /* ===== Reset + base ===== */
+      /* ╔══════════════════════════════════════════════════════════════════╗
+         ║  RESET / BASE                                                   ║
+         ╚══════════════════════════════════════════════════════════════════╝ */
       *{box-sizing:border-box}
       html,body{height:100%;margin:0}
       img,video{max-width:100%;height:auto;display:block}
@@ -43,14 +126,14 @@ const { title = 'De_Bajo' } = Astro.props;
         overflow-x:hidden; position:relative;
       }
 
-      /* ===== Grano + viñeta ===== */
+      /* ── Grano + viñeta ─────────────────────────────────────────────── */
       body::before{
         content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
         background-image:url("data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
 <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/></filter>\
 <rect width='100%' height='100%' filter='url(%23n)' opacity='.14'/></svg>");
-        mix-blend-mode:multiply; opacity:.35;
+        mix-blend-mode:multiply; opacity:var(--grain-opacity);
       }
       body::after{
         content:""; position:fixed; inset:-10vmax; pointer-events:none; z-index:0;
@@ -60,9 +143,16 @@ const { title = 'De_Bajo' } = Astro.props;
           radial-gradient(140vmax 100vmax at -20% 120%, transparent 40%, rgba(0,0,0,.45) 100%);
       }
 
-      /* ===== Layout helpers ===== */
-      .container{width:min(1120px,100%);padding:0 16px;margin:0 auto;position:relative;z-index:1}
-      .section{padding:90px 0;border-top:1px solid rgba(0,0,0,.04)}
+      /* ╔══════════════════════════════════════════════════════════════════╗
+         ║  HELPERS (contenedor, secciones, títulos)                        ║
+         ╚══════════════════════════════════════════════════════════════════╝ */
+      .container{
+        width:min(var(--container-max),100%);
+        padding:0 var(--container-pad-x);
+        margin:0 auto;
+        position:relative; z-index:1;
+      }
+      .section{padding:var(--section-pad) 0;border-top:1px solid rgba(0,0,0,.04)}
       .section:first-of-type{border-top:0}
       .section-title{
         font-family:"Oswald",system-ui; font-weight:900; text-transform:uppercase;
@@ -75,84 +165,118 @@ const { title = 'De_Bajo' } = Astro.props;
         color:var(--brand); text-transform:uppercase; margin-bottom:10px;
       }
 
-      /* ===== Navbar negro ===== */
-      .navbar{
-        position:sticky; top:0; z-index:60;
-        background:#0b0b0c; border-bottom:1px solid rgba(255,255,255,.08);
-      }
-      .navbar-inner{height:66px; display:flex; align-items:center; justify-content:space-between}
+      /* ╔══════════════════════════════════════════════════════════════════╗
+         ║  NAVBAR (markup en src/components/Navbar.astro)                 ║
+         ╚══════════════════════════════════════════════════════════════════╝ */
+      .navbar{position:sticky; top:0; z-index:60; background:#0b0b0c; border-bottom:1px solid rgba(255,255,255,.08)}
+      .navbar-inner{height:var(--navbar-h); display:flex; align-items:center; justify-content:space-between}
       .brand{font-weight:900; letter-spacing:.14em; color:var(--brand); text-decoration:none}
-      .nav-links a{
-        color:#e6b3ae; text-decoration:none; text-transform:uppercase;
-        letter-spacing:.14em; margin-left:22px; font-size:13px; opacity:.9;
-      }
+      .nav-links a{color:#e6b3ae; text-decoration:none; text-transform:uppercase; letter-spacing:.14em; margin-left:22px; font-size:13px; opacity:.9}
       .nav-links a:hover{opacity:1; text-decoration:underline}
-      .mobile-toggle{
-        display:none; align-items:center; justify-content:center;
-        width:40px; height:40px; border:1px solid rgba(255,255,255,.15);
-        background:#111; color:#e6b3ae; border-radius:10px; cursor:pointer;
-      }
-
-      /* Drawer móvil */
-      .nav-drawer{
-        position:fixed; inset:66px 0 0 0; background:#0b0b0c; display:none;
-        flex-direction:column; gap:12px; padding:18px; border-top:1px solid rgba(255,255,255,.08);
-      }
+      .mobile-toggle{display:none; align-items:center; justify-content:center; width:40px; height:40px; border:1px solid rgba(255,255,255,.15); background:#111; color:#e6b3ae; border-radius:10px; cursor:pointer}
+      .nav-drawer{position:fixed; inset:var(--navbar-h) 0 0 0; background:#0b0b0c; display:none; flex-direction:column; gap:12px; padding:18px; border-top:1px solid rgba(255,255,255,.08)}
       .nav-drawer a{ color:#e6b3ae; text-decoration:none; text-transform:uppercase; letter-spacing:.18em; font-size:14px; padding:10px 2px }
       .nav-drawer a:hover{ text-decoration:underline }
 
-      /* ===== Hero ===== */
-      .hero{display:grid; grid-template-columns:1fr auto; gap:32px; align-items:center; padding:84px 0; position:relative}
-      .hero-title{
-        font-family:"Oswald",system-ui; font-weight:900;
-        text-transform:uppercase; color:var(--ink);
-        font-size: clamp(56px, 14vw, 180px); line-height:.85; letter-spacing:.05em;
-        position:relative;
+      /* ╔══════════════════════════════════════════════════════════════════╗
+         ║  HERO (con controles de movimiento)                             ║
+         ╚══════════════════════════════════════════════════════════════════╝ */
+      .hero{
+        display:grid; grid-template-columns:1fr auto;
+        gap:var(--hero-gap); align-items:center;
+        padding:calc(var(--section-pad) - 6px) 0; position:relative;
       }
-      .hero-title .a-block{ position:absolute; left:52%; top:8%; width:13%; height:72%; background:#fff; z-index:-1; box-shadow:var(--shadow) }
-      .hero-sub{ margin-top:8px; font-size: clamp(14px, 2.6vw, 22px); text-transform:uppercase; letter-spacing:.18em; color:#101010; text-shadow:0 2px 8px rgba(0,0,0,.45) }
-      .hero-side{ align-self:start; padding-top:16px; display:grid; gap:8px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#111; text-shadow:0 2px 8px rgba(0,0,0,.45) }
-      .polaroid{ position:absolute; right:5%; bottom:-4%; width:min(280px,32vw); background:#fff; color:#fff; transform:rotate(-6deg); box-shadow: var(--shadow); padding:12px 12px 24px; border-radius:8px; border:1px solid rgba(0,0,0,.12) }
-      .polaroid .ph{background:#000; height:180px; border-radius:4px}
+
+      /* Título gigante */
+      .hero-title{
+        font-family:"Oswald",system-ui; font-weight:900; text-transform:uppercase; color:var(--ink);
+        font-size: clamp(56px, 14vw, 180px); line-height:.85; letter-spacing:.04em;
+        position:relative;
+        transform: translate(var(--hero-title-tx), var(--hero-title-ty)) scale(var(--hero-title-scale));
+        transform-origin: center top;
+      }
+
+      /* Bloque blanco detrás de la “A” (posiciones base + offsets) */
+      .hero-title .a-block{
+        position:absolute; left:var(--hero-a-left); top:var(--hero-a-top);
+        width:var(--hero-a-w); height:var(--hero-a-h); background:#fff; z-index:-1; box-shadow:var(--shadow);
+        transform: translate(var(--hero-a-x), var(--hero-a-y));
+      }
+
+     .hero-sub{
+  margin-top: var(--subtitle-mt);
+  font-size: clamp(14px, 2.6vw, 22px);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: #101010;
+  text-shadow: 0 2px 8px rgba(0,0,0,.45);
+  /* controles de movimiento/escala */
+  transform: translate(var(--subtitle-tx), var(--subtitle-ty))
+             scale(var(--subtitle-scale));
+  transform-origin: left top;
+}
+
+      .hero-side{
+        align-self:start; margin-top:var(--hero-side-mt); margin-left:var(--hero-side-ml);
+        display:grid; gap:8px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#111;
+        text-shadow:0 2px 8px rgba(0,0,0,.45);
+        transform: translate(var(--hero-side-x), var(--hero-side-y));
+      }
+
+      /* Polaroid (posición base + offsets + rotación) */
+      .polaroid{
+        position:absolute; right:var(--polaroid-right); bottom:var(--polaroid-bottom);
+        width:min(var(--polaroid-w), 32vw); background:#fff; color:#fff;
+        transform: translate(var(--polaroid-x), var(--polaroid-y)) rotate(var(--polaroid-rot));
+        box-shadow:var(--shadow); padding:12px 12px 24px; border-radius:8px; border:1px solid rgba(0,0,0,.12);
+      }
+      .polaroid .ph{background:#000; height:var(--polaroid-h); border-radius:4px}
       .polaroid .caption{margin-top:10px; color:#de6a5e; font-weight:700; letter-spacing:.12em}
 
-      /* ===== Panel “papel con puntitos” ===== */
+      /* ╔══════════════════════════════════════════════════════════════════╗
+         ║  PANELES / HISTORIA / BIOS                                      ║
+         ╚══════════════════════════════════════════════════════════════════╝ */
       .panel{
         background:
           radial-gradient(circle at 1px 1px, var(--paper-dot) 1px, transparent 1.2px) 0 0/12px 12px,
           var(--paper);
-        color:var(--text);
-        border:1px solid var(--line);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        padding: 26px;
+        color:var(--text); border:1px solid var(--line); border-radius:var(--radius);
+        box-shadow:var(--shadow); padding:26px;
       }
-
-      /* ===== Grillas ===== */
+      .story img{ max-width: var(--story-img-max); width:100% }
       .bios{ display:grid; grid-template-columns:1fr 1fr; gap:22px }
-      .cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px }
+      .bio-item{ display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start }
+      .bio-item img{ width:var(--bio-img); height:var(--bio-img); object-fit:cover; border:2px solid rgba(255,255,255,.25) }
+      .bio-name{ margin-top:12px; font-weight:900; letter-spacing:.18em; text-transform:uppercase; color:#a7433a }
+      .role{color:var(--muted)}
 
+      /* ╔══════════════════════════════════════════════════════════════════╗
+         ║  REVISTAS (tarjetas)                                            ║
+         ╚══════════════════════════════════════════════════════════════════╝ */
+      .cards{ display:grid; grid-template-columns:repeat(var(--cards-cols-desktop),1fr); gap:var(--grid-gap) }
       .card{
+        min-height:var(--card-min-h);
         background:
           radial-gradient(circle at 1px 1px, var(--paper-dot) 1px, transparent 1.2px) 0 0/12px 12px,
           var(--paper);
         border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow);
-        position:relative; overflow:hidden; min-height:420px; display:flex; flex-direction:column; justify-content:flex-end;
+        position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end;
         transition: transform .25s ease, box-shadow .25s ease;
       }
       .card:hover{ transform: translateY(-6px) scale(1.02); box-shadow:0 22px 70px rgba(0,0,0,.45) }
+      .card img{ width:100%; height:100%; object-fit:cover }
+      .card .cover{ width:100%; aspect-ratio:var(--card-ratio); object-fit:cover; display:block }
       .card .meta{display:flex; justify-content:space-between; align-items:center; padding:18px 18px 16px; color:#212121}
       .edition{font-weight:900; letter-spacing:.12em; text-transform:uppercase}
       .link{color:#a7433a; text-decoration:none; font-weight:800; letter-spacing:.18em}
       .link:hover{text-decoration:underline}
-      .badge{
-        position:absolute; left:16px; top:16px; font-size:12px; font-weight:900; letter-spacing:.18em; text-transform:uppercase;
-        padding:6px 10px; border-radius:8px;
-      }
+      .badge{ position:absolute; left:16px; top:16px; font-size:12px; font-weight:900; letter-spacing:.18em; text-transform:uppercase; padding:6px 10px; border-radius:8px }
       .badge.ok{background:#0e0e10; color:#fce1de; border:1px solid rgba(255,255,255,.12)}
       .badge.soon{background:#c34f45; color:#fff; border:1px solid rgba(0,0,0,.18)}
 
-      /* ===== Contacto / formularios ===== */
+      /* ╔══════════════════════════════════════════════════════════════════╗
+         ║  CONTACTO                                                       ║
+         ╚══════════════════════════════════════════════════════════════════╝ */
       .contact .panel form{ display:grid; gap:16px }
       .contact .panel .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:16px }
       .contact .panel input, .contact .panel textarea{
@@ -160,47 +284,48 @@ const { title = 'De_Bajo' } = Astro.props;
         border:1px solid rgba(0,0,0,.12); background:#fff; color:#111;
       }
       .contact .panel textarea{min-height:160px; resize:vertical}
-      .btn-primary{
-        display:inline-block; padding:12px 18px; border-radius:10px;
-        background:#0c0c0e; color:#e9b3ad; border:1px solid rgba(255,255,255,.12);
-        font-weight:900; letter-spacing:.2em; text-transform:uppercase; text-decoration:none;
-      }
+      .btn-primary{ display:inline-block; padding:12px 18px; border-radius:10px; background:#0c0c0e; color:#e9b3ad; border:1px solid rgba(255,255,255,.12); font-weight:900; letter-spacing:.2em; text-transform:uppercase; text-decoration:none }
       .btn-primary:hover{filter:brightness(1.1)}
 
-      /* ===== Footer negro ===== */
+      /* ╔══════════════════════════════════════════════════════════════════╗
+         ║  FOOTER                                                         ║
+         ╚══════════════════════════════════════════════════════════════════╝ */
       footer{ margin-top:100px; background:#0b0b0c; color:#e9b3ad; border-top:1px solid rgba(255,255,255,.08) }
       .foot-inner{height:68px; display:flex; align-items:center; justify-content:center; letter-spacing:.18em; text-transform:uppercase; font-weight:900}
 
-      /* ====== Responsivo ====== */
-      /* tablet */
+      /* ╔══════════════════════════════════════════════════════════════════╗
+         ║  RESPONSIVE (ajustá si querés otros breakpoints)                ║
+         ╚══════════════════════════════════════════════════════════════════╝ */
+      /* Tablet */
       @media (max-width: 1024px){
-        .cards{ grid-template-columns:repeat(2,1fr) }
-        .hero{ grid-template-columns: 1fr 1fr }
-        .polaroid{ right:2%; width:min(260px,36vw) }
+        .cards{ grid-template-columns:repeat(var(--cards-cols-tablet),1fr) }
+        .hero{ grid-template-columns:1fr 1fr }
+        :root{ --polaroid-w: 260px; --polaroid-right: 2% }
       }
-      /* mobile */
+      /* Mobile */
       @media (max-width: 800px){
         .nav-links{ display:none }
         .mobile-toggle{ display:inline-flex }
         .nav-drawer.show{ display:flex }
 
         .hero{ grid-template-columns:1fr; gap:18px; padding:56px 0 }
-        .hero-title .a-block{ display:none }       /* sacamos el bloque blanco en pantallas chicas */
-        .polaroid{ position:static; transform:none; margin-top:12px; width:80% }
+        .hero-title .a-block{ display:none }
+        :root{ --section-pad: 64px; --polaroid-w: 80vw; --polaroid-right: 0; --polaroid-bottom: 0; --polaroid-rot: 0deg }
+        .polaroid{ position:static; transform:none; margin-top:12px; width:var(--polaroid-w) }
         .bios{ grid-template-columns:1fr }
       }
-      /* mobile chico */
+      /* Mobile chico */
       @media (max-width: 560px){
-        .section{ padding:64px 0 }
-        .section-title{ font-size: clamp(34px, 10vw, 60px) }
         .cards{ grid-template-columns:1fr }
-        .card{ min-height:360px; border-radius:14px }
+        .card{ min-height: calc(var(--card-min-h) - 60px); border-radius:14px }
         .panel{ border-radius:14px; padding:18px }
-        .contact .panel .two-col{ grid-template-columns:1fr } /* inputs apilados */
+        .contact .panel .two-col{ grid-template-columns:1fr }
       }
     </style>
   </head>
+
   <body>
+    <!-- El contenido de cada página entra acá -->
     <slot />
 
     <!-- Footer global -->
