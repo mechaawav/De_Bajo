@@ -1,12 +1,67 @@
----
----
-<nav class="navbar">
-<div class="container navbar-inner">
-<a href="#inicio" style="font-weight:800; letter-spacing:.18em; text-decoration:none; color:#fff;">DE_BAJO</a>
-<div class="nav-links">
-<a href="#nosotras">NOSOTRAS</a>
-<a href="#revistas">REVISTAS</a>
-<a href="#contacto">CONTACTO</a>
-</div>
-</div>
-</nav>
+<header class="navbar">
+  <div class="container navbar-inner">
+    <a class="brand" href="/">DE_BAJO</a>
+
+    <nav class="nav-links">
+      <a href="#nosotras">NOSOTRAS</a>
+      <a href="#revistas">REVISTAS</a>
+      <a href="#contacto">CONTACTO</a>
+    </nav>
+
+    <button
+      id="nav-toggle"
+      class="mobile-toggle"
+      aria-controls="nav-drawer"
+      aria-expanded="false"
+      aria-label="Abrir menú"
+    >☰</button>
+  </div>
+
+  <!-- Drawer móvil -->
+  <nav id="nav-drawer" class="nav-drawer" hidden>
+    <a href="#nosotras">NOSOTRAS</a>
+    <a href="#revistas">REVISTAS</a>
+    <a href="#contacto">CONTACTO</a>
+  </nav>
+
+  <script type="module">
+    // @ts-check
+
+    /** @type {HTMLButtonElement | null} */
+    const btn = document.getElementById('nav-toggle');
+    /** @type {HTMLElement | null} */
+    const drawer = document.getElementById('nav-drawer');
+
+    if (!btn || !drawer) {
+      // Si el markup no está, no se hace nada (evita nulls).
+    } else {
+      /** @param {boolean} isOpen */
+      const openMenu = (isOpen) => {
+        if (isOpen) {
+          drawer.classList.add('show');
+          drawer.removeAttribute('hidden');
+          btn.setAttribute('aria-expanded', 'true');
+        } else {
+          drawer.classList.remove('show');
+          drawer.setAttribute('hidden', '');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      };
+
+      btn.addEventListener('click', () => {
+        openMenu(!drawer.classList.contains('show'));
+      });
+
+      drawer.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target instanceof HTMLAnchorElement) {
+          openMenu(false);
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 800) openMenu(false);
+      });
+    }
+  </script>
+</header>
