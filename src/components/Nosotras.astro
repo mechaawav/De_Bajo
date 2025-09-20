@@ -148,5 +148,27 @@ const move = {
     .bio3-text{
       transform: translate(var(--bio3-text-tx), var(--bio3-text-ty));
     }
+
+    /* ==============================
+       TIPOGRAFÍA Y NEGRITA (AGREGADO)
+       ============================== */
+
+    /* Texto grande de historia + párrafos de cada bio */
+    .story-text,
+    .bio-text p{
+      font-family: "Oswald", system-ui;  /* igual que DE_BAJO */
+      font-weight: 900;                   /* súper negrita */
+      letter-spacing: .02em;              /* opcional */
+    }
+
+    /* Nombres (h3) bien marcados */
+    .bio-text h3{
+      font-family: "Oswald", system-ui;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #a7433a;
+      margin: 0 0 8px;
+    }
   </style>
 </section>
