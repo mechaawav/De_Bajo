@@ -1,13 +1,84 @@
 ---
+/** Sólo diseño. La lógica de envío la agregamos luego con Supabase/EmailJS. */
 ---
-<section id="contacto" class="section">
-<div class="container contact">
-<h2 style="margin:0 0 16px; font-size:32px; letter-spacing:.1em;">Contacto</h2>
-<form class="shadow-card" style="padding:18px; display:grid; gap:12px;" method="post" action="/api/contact">
-<input required type="text" name="name" placeholder="Tu nombre" />
-<input required type="email" name="email" placeholder="Tu correo" />
-<textarea required name="message" rows="5" placeholder="Contanos tu consulta"></textarea>
-<button class="btn" type="submit">Enviar</button>
-</form>
-</div>
+
+<section id="contacto" class="section contact">
+  <div class="container">
+    <!-- Título igual al de “Nuestra historia” / “Revistas” -->
+    <h2
+      class="section-title"
+      style="
+        --st-size: clamp(36px, 7vw, 88px);
+        --st-letter: .08em;
+        --st-tx: 0px;
+        --st-ty: 0px;
+      "
+    >
+      Contacto
+    </h2>
+
+    <div class="panel">
+      <form id="contact-form" novalidate>
+        <!-- Nombre + Email (2 columnas en desktop) -->
+        <div class="two-col">
+          <div class="field">
+            <label for="name">Nombre</label>
+            <input id="name" name="name" type="text" placeholder="Tu nombre" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="Tu correo" required />
+          </div>
+        </div>
+
+        <!-- Mensaje -->
+        <div class="field">
+          <label for="message">Mensaje</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Contanos tu consulta"
+            rows="6"
+            required
+          ></textarea>
+        </div>
+
+        <!-- Acción -->
+        <div class="actions">
+          <button type="submit" class="btn-primary">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Estilos locales (sólo pulen la presentación del form) -->
+  <style>
+    .field label{
+      display:block;
+      margin: 0 0 8px;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color: var(--muted);
+    }
+
+    .actions{
+      display:flex;
+      justify-content:flex-end;
+      margin-top: 6px;
+    }
+
+    /* Un poco más de aire en inputs */
+    #contact-form .two-col { margin-bottom: 8px; }
+
+    /* Mobile: botón ancho completo */
+    @media (max-width: 560px){
+      .actions .btn-primary{
+        width:100%;
+        text-align:center;
+      }
+    }
+  </style>
 </section>
