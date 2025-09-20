@@ -71,8 +71,8 @@ const { title = 'De_Bajo — Revista del Under cordobés' } = Astro.props;
         --hero-a-y: 0;
 
         /* Polaroid (tarjeta inclinada) */
-        --polaroid-x: 0;
-        --polaroid-y: 250px;
+        --polaroid-x: 50px;
+        --polaroid-y: 400px;
 
         /* Lista lateral (Poesía / Ensayos / …) */
         --hero-side-x: 0;
@@ -92,13 +92,10 @@ const { title = 'De_Bajo — Revista del Under cordobés' } = Astro.props;
         --polaroid-rot: -6deg;
         --polaroid-h: 180px;
 
-        /* Lista lateral del hero */
-        --hero-side-mt: 16px;
-        --hero-side-ml: 0;
-
         /* Historia / bios */
-        --story-img-max: 720px;
+        --story-img-max: 700px;
         --bio-img: 140px;
+       
 
         /* Revistas (cards) */
         --card-min-h: 420px;
@@ -247,22 +244,38 @@ const { title = 'De_Bajo — Revista del Under cordobés' } = Astro.props;
       .polaroid .ph{background:#000; height:var(--polaroid-h); border-radius:4px}
       .polaroid .caption{margin-top:10px; color:#de6a5e; font-weight:700; letter-spacing:.12em}
 
-      /* ╔══════════════════════════════════════════════════════════════════╗
-         ║  PANELES / HISTORIA / BIOS                                      ║
-         ╚══════════════════════════════════════════════════════════════════╝ */
-      .panel{
-        background:
-          radial-gradient(circle at 1px 1px, var(--paper-dot) 1px, transparent 1.2px) 0 0/12px 12px,
-          var(--paper);
-        color:var(--text); border:1px solid var(--line); border-radius:var(--radius);
-        box-shadow:var(--shadow); padding:26px;
-      }
-      .story img{ max-width: var(--story-img-max); width:100% }
-      .bios{ display:grid; grid-template-columns:1fr 1fr; gap:22px }
-      .bio-item{ display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start }
-      .bio-item img{ width:var(--bio-img); height:var(--bio-img); object-fit:cover; border:2px solid rgba(255,255,255,.25) }
-      .bio-name{ margin-top:12px; font-weight:900; letter-spacing:.18em; text-transform:uppercase; color:#a7433a }
-      .role{color:var(--muted)}
+      /* ── Títulos de sección (usa las variables de arriba) ── */
+.section-title{
+  font-family: var(--st-font);
+  font-weight: var(--st-weight);
+  text-transform: uppercase;
+  letter-spacing: var(--st-letter);
+  color: var(--st-color);
+  font-size: var(--st-size);
+  line-height: var(--st-line);
+  margin: 0 0 var(--st-mb);
+  text-shadow: var(--st-shadow);
+  transform: translate(var(--st-tx), var(--st-ty));
+  transform-origin: left top;
+}
+
+/* ╔══════════════════════════════════════════════════════════════════╗ 
+   ║  PANELES / HISTORIA / BIOS                                      ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+.panel{
+  background:
+    radial-gradient(circle at 1px 1px, var(--paper-dot) 1px, transparent 1.2px) 0 0/12px 12px,
+    var(--paper);
+  color:var(--text); border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:var(--shadow); padding:26px;
+}
+.story img{ max-width: var(--story-img-max); width:100% }
+.bios{ display:grid; grid-template-columns:1fr 1fr; gap:22px }
+.bio-item{ display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start }
+.bio-item img{ width:var(--bio-img); height:var(--bio-img); object-fit:cover; border:2px solid rgba(255,255,255,.25) }
+.bio-name{ margin-top:12px; font-weight:900; letter-spacing:.18em; text-transform:uppercase; color:#a7433a }
+.role{color:var(--muted)}
+
 
       /* ╔══════════════════════════════════════════════════════════════════╗
          ║  REVISTAS (tarjetas)                                            ║

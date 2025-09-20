@@ -1,67 +1,152 @@
 ---
+/**
+ * Perillas: cambiá estos valores y guardá.
+ * Positivo X = derecha | Negativo X = izquierda
+ * Positivo Y = abajo   | Negativo Y = arriba
+ */
+const move = {
+  // Historia (arriba)
+  '--story-img-tx': '0px', '--story-img-ty': '35px',   // Imagen grande
+  '--story-text-tx': '0px', '--story-text-ty': '50px', // Párrafo grande
+
+  // BIO 1 (Athena)
+  '--bio1-img-tx': '0px', '--bio1-img-ty': '125px',
+  '--bio1-text-tx': '0px', '--bio1-text-ty': '100px',
+  '--bio1-size': 'var(--bio-img)', // ej: '160px' para agrandar solo esta
+
+  // BIO 2 (Princesa Yugoslava)
+  '--bio2-img-tx': '0px', '--bio2-img-ty': '125px',
+  '--bio2-text-tx': '0px', '--bio2-text-ty': '100px',
+  '--bio2-size': 'var(--bio-img)',
+
+  // BIO 3 (Mononoke)
+  '--bio3-img-tx': '250px', '--bio3-img-ty': '125px',
+  '--bio3-text-tx': '250px', '--bio3-text-ty': '100px',
+  '--bio3-size': 'var(--bio-img)',
+};
 ---
-<section id="nosotras" class="section">
-<div class="container">
-<div class="story">
-<h2 style="margin:0 0 12px; font-size:32px; letter-spacing:.1em;">Nuestra historia</h2>
-<img src="/images/nosotras.png" alt="Nuestra historia" />
-<p>
-de_bajo surge entre conversaciones de marxismo hegeliano y corazones rotos. 
-Entre el humo denso de un pucho prendido en un bar de mala muerte y un amargo obrero 
-compartido entre dos amigas que aman la música y la cultura del under cordobés, nace 
-nuestra revista digital. 
- Lo que comenzó como una idea se transforma hoy en un espacio que 
- da cuenta de lo que ocurre sobre (y de_bajo de) los escenarios de la ciudad. Caminamos 
- las noches frías con una botella de vino en la mano buscando el mejor recital de rock 
- alternativo, pasamos de bar en bar con un porro en mano, siempre persiguiendo música en 
- vivo que nos ponga los pelos de punta, y surcamos el Suquía hasta sus límites geográficos 
- para crear este rincón cultural, accesible para todxs. 
-</p>
-</div>
+<section id="nosotras" class="section" style={move}>
+  <div class="container">
+    <!-- Historia -->
+    <div class="story">
+      <h2
+        class="section-title"
+        style="
+          --st-size: clamp(36px, 7vw, 88px);
+          --st-letter: .08em;
+          --st-tx: 0px;
+          --st-ty: 30px;
+        "
+      >
+        Nuestra historia
+      </h2>
 
+      <!-- Imagen grande (mover con --story-img-*) -->
+      <img src="/images/nosotras.png" alt="Nuestra historia" loading="lazy" decoding="async" class="story-img" />
 
-<div class="bio">
-<div class="bio-item">
-<img src="/images/ari.png" alt="Bio 1" />
-<div>
-<h3>Athena</h3>
-<p> 
-Athena arma los bocetos de estas páginas entre libros de historia del arte, cuadernos llenos 
-de manuscritos y collages esparcidos sobre la mesa de trabajo. Ella se mueve con la 
-libertad de una aprendiz autodidacta de todas las formas de arte posibles, incluso de 
-aquellas que todavía no nacieron. Taurina con luna en Piscis, juega a ser directora de arte y 
-diseño acompañada del gatote más gordo de la capital cordobesa. Sáfica, azulada y 
-siempre buscando encontrar la belleza en los rincones más inesperados de la ciudad. </p>
-</div>
-</div>
-<div class="bio-item">
-<img src="/images/mile.png" alt="Bio 2" />
-<div>
-<h3>Princesa Yugoslava</h3>
-<p> 
-Ratoncita de biblioteca y osteópata del espíritu, Princesa Yugoslava es cordobesa por 
-adopción, traductora en potencia y devota oyente del Álbum Blanco. Beatnik de corazón, 
-con Kerouac en la mochila y Ginsberg en la mesita de luz, es una snob confesa de la 
-literatura y el buen cine. Frecuentadora de bares de mala muerte y poeta de estrofas sin 
-rima, es directora editorial de mentiritas mientras cultiva la pose de quien ya lo ha leído (y 
-visto) todo. </p>
-</div>
-</div>
-<div class="bio-item">
-<img src="/images/mecha.png" alt="Bio 3" />
-<div>
-<h3>Mononoke</h3>
-<p>
-    Música profesional, hacker por diversión y arquitecta de nuestro mundo digital, Mononoke 
-    es telepática, intuitiva y de Leo (como el amor de su vida). Madre orgullosa de seis criaturas 
-    peludas, fan incorregible de Paramore y portadora de oído absoluto como Charly (y no 
-    XCX), es una porteña exiliada en la República de Córdoba y quien hila todo lo que no está 
-    a simple vista y late en la dermis de nuestro sueño. Con cada línea de código que escribe 
-    y cada Marlboro convertible que comparte en nuestras reuniones, se encarga de darle forma 
-    y visión a nuestro universo creativo. 
-</p>
-</div>
-</div>
-</div>
-</div>
+      <!-- Texto grande (mover con --story-text-*) -->
+      <p class="story-text">
+        de_bajo surge entre conversaciones de marxismo hegeliano y corazones rotos.
+        Entre el humo denso de un pucho prendido en un bar de mala muerte y un amargo obrero
+        compartido entre dos amigas que aman la música y la cultura del under cordobés, nace
+        nuestra revista digital.
+        Lo que comenzó como una idea se transforma hoy en un espacio que
+        da cuenta de lo que ocurre sobre (y de_bajo de) los escenarios de la ciudad. Caminamos
+        las noches frías con una botella de vino en la mano buscando el mejor recital de rock
+        alternativo, pasamos de bar en bar con un porro en mano, siempre persiguiendo música en
+        vivo que nos ponga los pelos de punta, y surcamos el Suquía hasta sus límites geográficos
+        para crear este rincón cultural, accesible para todxs.
+      </p>
+    </div>
+
+    <!-- Bios -->
+    <div class="bios">
+      <!-- BIO 1 -->
+      <div class="bio-item">
+        <img src="/images/ari.png" alt="Athena" class="bio-img bio1-img" loading="lazy" decoding="async" />
+        <div class="bio-text bio1-text">
+          <h3>Athena</h3>
+          <p>
+            Athena arma los bocetos de estas páginas entre libros de historia del arte, cuadernos llenos
+            de manuscritos y collages esparcidos sobre la mesa de trabajo. Ella se mueve con la
+            libertad de una aprendiz autodidacta de todas las formas de arte posibles, incluso de
+            aquellas que todavía no nacieron. Taurina con luna en Piscis, juega a ser directora de arte y
+            diseño acompañada del gatote más gordo de la capital cordobesa. Sáfica, azulada y
+            siempre buscando encontrar la belleza en los rincones más inesperados de la ciudad.
+          </p>
+        </div>
+      </div>
+
+      <!-- BIO 2 -->
+      <div class="bio-item">
+        <img src="/images/mile.png" alt="Princesa Yugoslava" class="bio-img bio2-img" loading="lazy" decoding="async" />
+        <div class="bio-text bio2-text">
+          <h3>Princesa Yugoslava</h3>
+          <p>
+            Ratoncita de biblioteca y osteópata del espíritu, Princesa Yugoslava es cordobesa por
+            adopción, traductora en potencia y devota oyente del Álbum Blanco. Beatnik de corazón,
+            con Kerouac en la mochila y Ginsberg en la mesita de luz, es una snob confesa de la
+            literatura y el buen cine. Frecuentadora de bares de mala muerte y poeta de estrofas sin
+            rima, es directora editorial de mentiritas mientras cultiva la pose de quien ya lo ha leído (y
+            visto) todo.
+          </p>
+        </div>
+      </div>
+
+      <!-- BIO 3 -->
+      <div class="bio-item">
+        <img src="/images/mecha.png" alt="Mononoke" class="bio-img bio3-img" loading="lazy" decoding="async" />
+        <div class="bio-text bio3-text">
+          <h3>Mononoke</h3>
+          <p>
+            Música profesional, hacker por diversión y arquitecta de nuestro mundo digital, Mononoke
+            es telepática, intuitiva y de Leo (como el amor de su vida). Madre orgullosa de seis criaturas
+            peludas, fan incorregible de Paramore y portadora de oído absoluto como Charly (y no
+            XCX), es una porteña exiliada en la República de Córdoba y quien hila todo lo que no está
+            a simple vista y late en la dermis de nuestro sueño. Con cada línea de código que escribe
+            y cada Marlboro convertible que comparte en nuestras reuniones, se encarga de darle forma
+            y visión a nuestro universo creativo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estilos locales (scoped) para aplicar los offsets -->
+  <style>
+    /* Historia */
+    .story-img{
+      transform: translate(var(--story-img-tx), var(--story-img-ty));
+    }
+    .story-text{
+      transform: translate(var(--story-text-tx), var(--story-text-ty));
+    }
+
+    /* Bio 1 */
+    .bio1-img{
+      width: var(--bio1-size); height: var(--bio1-size); object-fit: cover;
+      transform: translate(var(--bio1-img-tx), var(--bio1-img-ty));
+    }
+    .bio1-text{
+      transform: translate(var(--bio1-text-tx), var(--bio1-text-ty));
+    }
+
+    /* Bio 2 */
+    .bio2-img{
+      width: var(--bio2-size); height: var(--bio2-size); object-fit: cover;
+      transform: translate(var(--bio2-img-tx), var(--bio2-img-ty));
+    }
+    .bio2-text{
+      transform: translate(var(--bio2-text-tx), var(--bio2-text-ty));
+    }
+
+    /* Bio 3 */
+    .bio3-img{
+      width: var(--bio3-size); height: var(--bio3-size); object-fit: cover;
+      transform: translate(var(--bio3-img-tx), var(--bio3-img-ty));
+    }
+    .bio3-text{
+      transform: translate(var(--bio3-text-tx), var(--bio3-text-ty));
+    }
+  </style>
 </section>
