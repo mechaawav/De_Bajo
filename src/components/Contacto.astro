@@ -1,6 +1,36 @@
----
-/** Sólo diseño. La lógica de envío la agregamos luego con Supabase/EmailJS. */
----
+<script is:inline>
+  const form = document.getElementById('contact-form');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const payload = {
+      name: fd.get('name'),
+      email: fd.get('email'),
+      message: fd.get('message'),
+    };
+
+    const btn = form.querySelector('button[type="submit"]');
+    const original = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Enviando…';
+
+    try {
+      const r = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok || !data.ok) throw new Error(data.error || `HTTP ${r.status}`);
+      alert('¡Gracias! Te vamos a escribir :)');
+      form.reset();
+    } catch (err) {
+      console.error('contact error', err);
+      alert(`Uy, no se pudo enviar: ${err.message}`);
+    } finally {
+      btn.disabled = false; btn.textContent = original;
+    }
+  });
+</script>
 
 <section id="contacto" class="section contact">
   <div class="container">
