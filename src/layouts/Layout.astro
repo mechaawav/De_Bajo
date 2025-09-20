@@ -280,6 +280,50 @@ const { title = 'De_Bajo — Revista del Under cordobés' } = Astro.props;
       /* ╔══════════════════════════════════════════════════════════════════╗
          ║  REVISTAS (tarjetas)                                            ║
          ╚══════════════════════════════════════════════════════════════════╝ */
+
+/* ── Revistas: botón arriba-izquierda ───────────────────────────── */
+.magazines .card { position: relative; overflow: hidden; }
+
+.magazines .card-action{
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: inline-block;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  background: #0e0e10;
+  color: #fbe3df;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  z-index: 2;
+}
+.magazines .card:hover .card-action{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.35);
+}
+
+/* Estado deshabilitado (Próximamente) */
+.magazines .card-action.is-disabled,
+.magazines .card-action[aria-disabled="true"]{
+  opacity: .65;
+  cursor: default;
+  pointer-events: none;
+  background: #3a3a3a;
+  color: #ddd;
+  border-color: rgba(255,255,255,.08);
+}
+
+/* Si existe un link "Leer" en el footer de la card, ocultarlo */
+.magazines .card .meta .link{ display:none; }
+
+
       .cards{ display:grid; grid-template-columns:repeat(var(--cards-cols-desktop),1fr); gap:var(--grid-gap) }
       .card{
         min-height:var(--card-min-h);
@@ -300,6 +344,60 @@ const { title = 'De_Bajo — Revista del Under cordobés' } = Astro.props;
       .badge{ position:absolute; left:16px; top:16px; font-size:12px; font-weight:900; letter-spacing:.18em; text-transform:uppercase; padding:6px 10px; border-radius:8px }
       .badge.ok{background:#0e0e10; color:#fce1de; border:1px solid rgba(255,255,255,.12)}
       .badge.soon{background:#c34f45; color:#fff; border:1px solid rgba(0,0,0,.18)}
+/* ── Modal genérico ───────────────────────────────────────────── */
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(0,0,0,.6);
+  opacity:0; pointer-events:none; transition:opacity .18s ease; z-index:80;
+}
+.modal-backdrop.show{ opacity:1; pointer-events:auto; }
+
+.modal{
+  position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  pointer-events:none; z-index:81;
+}
+.modal .dialog{
+  width:min(960px, 94vw);
+  transform:translateY(10px) scale(.98);
+  opacity:0; transition:transform .18s ease, opacity .18s ease;
+  pointer-events:auto;
+}
+.modal.show .dialog{ transform:none; opacity:1; }
+
+/* Cerrar */
+.modal-close{
+  position:absolute; top:12px; right:12px; width:34px; height:34px;
+  display:inline-flex; align-items:center; justify-content:center;
+  border:1px solid rgba(0,0,0,.12); background:#fff; color:#111;
+  border-radius:10px; cursor:pointer; font-size:22px; line-height:1;
+}
+
+/* Layout interno del modal (reusa tu .panel, .btn-primary, etc.) */
+.auth-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:8px;
+}
+.auth-title{
+  margin:0 0 10px; font-weight:900; letter-spacing:.12em; text-transform:uppercase; color:var(--ink);
+}
+.auth-row{
+  display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center;
+}
+.auth-row-2{ grid-template-columns:1fr 1fr auto; }
+.auth-row input{
+  width:100%; padding:12px 14px; border-radius:10px;
+  border:1px solid rgba(0,0,0,.12); background:#fff; color:#111;
+}
+.auth-msg{ margin:14px 2px 0; font-size:14px; }
+.auth-msg.ok{ color:#246b2e }
+.auth-msg.err{ color:#8a2b2b }
+
+/* Responsive */
+@media (max-width: 900px){
+  .auth-grid{ grid-template-columns:1fr; }
+}
+@media (max-width: 560px){
+  .auth-row, .auth-row-2{ grid-template-columns:1fr; }
+}
+
 
       /* ╔══════════════════════════════════════════════════════════════════╗
          ║  CONTACTO                                                       ║

@@ -3,9 +3,9 @@ import MagazineCard from './MagazineCard.jsx';
 import EmailModal from './EmailModal.jsx';
 
 const magazines = [
-  { title: 'De_Bajo #1', cover: '/images/portada1.jpg', slug: 'revista-1' },
-  { title: 'De_Bajo #2', cover: '/images/portada2.jpg', slug: 'revista-2' },
-  { title: 'De_Bajo #3', cover: '/images/portada3.jpg', slug: 'revista-3' },
+  { title: 'De_Bajo #1', cover: '/images/ari.png',  slug: 'revista-1', available: true  },
+  { title: 'De_Bajo #2', cover: '/images/mile.png', slug: 'revista-2', available: false },
+  { title: 'De_Bajo #3', cover: '/images/mecha.png',slug: 'revista-3', available: false },
 ];
 
 export default function Revistas() {
@@ -16,17 +16,28 @@ export default function Revistas() {
   return (
     <section id="revistas" className="section">
       <div className="container">
-        <h2 style={{ margin: 0, marginBottom: 16, fontSize: 32, letterSpacing: '.1em' }}>
+        {/* Título con el mismo estilo que “Nuestra historia” */}
+        <h2
+          className="section-title"
+          style={{
+            ['--st-size']: 'clamp(36px, 7vw, 88px)',
+            ['--st-letter']: '.08em',
+            ['--st-tx']: '0px',
+            ['--st-ty']: '0px',
+          }}
+        >
           Revistas
         </h2>
 
-        <div className="cards">
+        {/* Grilla de tarjetas (con clase 'magazines' para el botón arriba-izq) */}
+        <div className="cards magazines">
           {magazines.map((m) => (
             <MagazineCard
               key={m.slug}
               cover={m.cover}
               title={m.title}
               slug={m.slug}
+              available={m.available !== false}
               onRead={() => onRead(m.slug)}
             />
           ))}
