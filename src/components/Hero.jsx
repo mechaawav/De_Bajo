@@ -38,12 +38,9 @@ export default function Hero() {
     '--a-letter-ty': '0px',
     '--a-letter-scale': '1',
 
-    /* LISTA LATERAL (poesía / ensayos / ...) */
-    '--side-tx': '0px',
-    '--side-ty': '0px',
 
     /* POLAROID */
-    '--polaroid-right': '20%',
+    '--polaroid-right': '10%',
     '--polaroid-bottom': '-25%',
     '--polaroid-w': '280px',
     '--polaroid-h': '180px',
@@ -53,6 +50,8 @@ export default function Hero() {
 
     /* ESTRUCTURA DEL HERO */
     '--hero-gap': '30px',
+
+    
   };
 
   return (
@@ -68,14 +67,6 @@ export default function Hero() {
           JO
         </h1>
         <div className="hero-sub">La revista del Under cordobés</div>
-      </div>
-
-      <div className="hero-side">
-        <div>POESÍA</div>
-        <div>ENSAYOS</div>
-        <div>ENTREVISTAS</div>
-        <div>CINE</div>
-        <div>MÚSICA</div>
       </div>
 
       <div className="polaroid">
