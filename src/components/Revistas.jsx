@@ -3,9 +3,9 @@ import MagazineCard from './MagazineCard.jsx';
 import EmailModal from './EmailModal.jsx';
 
 const magazines = [
-  { title: 'De_Bajo #1', cover: '/images/ari.png',  slug: 'revista-1', available: true  },
-  { title: 'De_Bajo #2', cover: '/images/mile.png', slug: 'revista-2', available: false },
-  { title: 'De_Bajo #3', cover: '/images/mecha.png',slug: 'revista-3', available: false },
+  { title: 'De_Bajo #1', cover: '/images/ari.jpg',  slug: 'revista-1', available: true  },
+  { title: 'De_Bajo #2', cover: '/images/mile.jpg', slug: 'revista-2', available: false },
+  { title: 'De_Bajo #3', cover: '/images/mecha.jpg',slug: 'revista-3', available: false },
 ];
 
 export default function Revistas() {

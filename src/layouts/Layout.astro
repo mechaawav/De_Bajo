@@ -239,10 +239,20 @@ const { title = 'De_Bajo — Revista del Under cordobés' } = Astro.props;
         position:absolute; right:var(--polaroid-right); bottom:var(--polaroid-bottom);
         width:min(var(--polaroid-w), 32vw); background:#fff; color:#fff;
         transform: translate(var(--polaroid-x), var(--polaroid-y)) rotate(var(--polaroid-rot));
-        box-shadow:var(--shadow); padding:12px 12px 24px; border-radius:8px; border:1px solid rgba(0,0,0,.12);
+        box-shadow:var(--shadow); padding:10px 10px 10px; border-radius:8px; border:1px solid rgba(0,0,0,.12);
       }
       .polaroid .ph{background:#000; height:var(--polaroid-h); border-radius:4px}
       .polaroid .caption{margin-top:10px; color:#de6a5e; font-weight:700; letter-spacing:.12em}
+      .polaroid .ph{
+  display:block;
+  width:100%;
+  height:var(--polaroid-h);
+  object-fit:cover;        /* o 'contain' si no querés recortes */
+  object-position:center;  /* centrada */
+  border-radius:4px;
+  background:#000;         /* fallback mientras carga */
+}
+
 
       /* ── Títulos de sección (usa las variables de arriba) ── */
 .section-title{

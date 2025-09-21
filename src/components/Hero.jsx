@@ -69,10 +69,11 @@ export default function Hero() {
         <div className="hero-sub">La revista del Under cordobés</div>
       </div>
 
-      <div className="polaroid">
-        <div className="ph" />
-        <div className="caption">DE_BAJO</div>
-      </div>
+  <div className="polaroid">
+  <img className="ph" src="/images/logo1.png" alt="Foto polaroid" loading="lazy" decoding="async" />
+  <div className="caption">DE_BAJO</div>
+</div>
+
     </section>
   );
 }
