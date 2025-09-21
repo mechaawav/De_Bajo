@@ -37,3 +37,4 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 };
+// Recuerda configurar PUBLIC_FORMSPREE_CONTACT_ID en tus variables de entorno 
