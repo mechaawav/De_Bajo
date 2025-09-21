@@ -1,41 +1,39 @@
-export const prerender = false;
-
+// src/pages/api/contact.ts
 import type { APIRoute } from 'astro';
-import { supabaseAdmin } from '../../lib/supabase';
 
-async function sendEmailJS(params: Record<string, any>, templateKey = 'EMAILJS_TEMPLATE_ID_CONTACT') {
-  const service_id = import.meta.env.EMAILJS_SERVICE_ID!;
-  const template_id = import.meta.env[templateKey]!;
-  const user_id    = import.meta.env.EMAILJS_PUBLIC_KEY!;
-  const r = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ service_id, template_id, user_id, template_params: params }),
-  });
-  if (!r.ok) {
-    const t = await r.text();
-    throw new Error(`EmailJS failed: ${t}`);
-  }
-}
+export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { name, email, message } = await request.json();
-    if (!name || !email || !message) {
-      return new Response(JSON.stringify({ ok: false, error: 'missing' }), { status: 400 });
-    }
+    const form = await request.formData(); // si envías desde <form> tradicional
+    // O si desde fetch/json: const { name, email, message } = await request.json();
 
-    await supabaseAdmin.from('contact_messages').insert({ name, email, message });
+    const endpoint = `https://formspree.io/f/${import.meta.env.PUBLIC_FORMSPREE_CONTACT_ID}`;
 
-    await sendEmailJS({
-      from_name: name,
-      from_email: email,
-      message,
-      to_email: 'mecarabajal13@gmail.com',
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      body: form, // si usaste formData arriba
+      // Si fueras JSON:
+      // headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      // body: JSON.stringify({ name, email, message, type: 'contact' }),
     });
 
-    return new Response(JSON.stringify({ ok: true }), { status: 200 });
-  } catch (e: any) {
-    return new Response(JSON.stringify({ ok: false, error: e?.message ?? String(e) }), { status: 500 });
+    if (!res.ok) {
+      const txt = await res.text().catch(() => '');
+      return new Response(JSON.stringify({ ok: false, error: txt || 'Formspree error' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    return new Response(JSON.stringify({ ok: true }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (err: any) {
+    return new Response(JSON.stringify({ ok: false, error: err?.message || 'Unexpected error' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 };
