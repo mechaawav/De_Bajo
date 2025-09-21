@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.3.1",
-    "@astrojs/vercel": "^8.2.7",
     "@supabase/supabase-js": "^2.57.4",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
@@ -18,5 +17,8 @@
     "bcryptjs": "^3.0.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@astrojs/vercel": "^8.2.7"
   }
 }

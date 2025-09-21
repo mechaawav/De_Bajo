@@ -1,4 +1,10 @@
-export default function MagazineCard({ cover, title, slug, onRead, available = true }) {
+export default function MagazineCard({
+  cover,
+  title,
+  slug,
+  onRead,
+  available = true,
+}) {
   return (
     <article className="card">
       <img
@@ -13,17 +19,18 @@ export default function MagazineCard({ cover, title, slug, onRead, available = t
       <button
         type="button"
         className={`card-action${available ? '' : ' is-disabled'}`}
+        disabled={!available}
         aria-disabled={!available}
-        onClick={available ? onRead : undefined}
+        onClick={available ? () => onRead?.(slug) : undefined}
       >
         {available ? 'Leer' : 'Próximamente'}
       </button>
 
-      {/* Meta de la card (si tenías un link acá, quedará oculto por CSS) */}
+      {/* Meta de la card */}
       <div className="meta">
         <span className="edition">{title}</span>
-        {/* <a className="link" href={`/revistas/${slug}`}>Leer</a> */}
       </div>
     </article>
   );
 }
+

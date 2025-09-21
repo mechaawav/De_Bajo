@@ -23,7 +23,7 @@ export default function Hero() {
     /* TÍTULO GIGANTE */
     '--title-tx': '0px',
     '--title-ty': '0px',
-    '--title-scale': '2.1',
+    '--title-scale': '2.3',
 
     /* BLOQUE BLANCO DETRÁS DE LA “A” (posición base + micro-ajustes) */
     '--a-left': '52%',

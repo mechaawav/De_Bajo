@@ -11,9 +11,6 @@ importers:
       '@astrojs/react':
         specifier: ^4.3.1
         version: 4.3.1(@types/node@24.5.1)(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      '@astrojs/vercel':
-        specifier: ^8.2.7
-        version: 8.2.7(astro@5.13.8(@types/node@24.5.1)(@vercel/functions@2.2.13)(rollup@4.50.2)(typescript@5.9.2))(react@19.1.1)(rollup@4.50.2)
       '@supabase/supabase-js':
         specifier: ^2.57.4
         version: 2.57.4
@@ -35,6 +32,10 @@ importers:
       react-dom:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
+    devDependencies:
+      '@astrojs/vercel':
+        specifier: ^8.2.7
+        version: 8.2.7(astro@5.13.8(@types/node@24.5.1)(@vercel/functions@2.2.13)(rollup@4.50.2)(typescript@5.9.2))(react@19.1.1)(rollup@4.50.2)
 
 packages:
 
